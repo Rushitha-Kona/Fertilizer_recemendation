@@ -1,17 +1,26 @@
 import pickle
 import numpy as np
 import streamlit as st
+import os
 
-# Load model and encoders
-model = pickle.load(open("rf_file.pkl", "rb"))
-soil_enc = pickle.load(open("soil.pkl", "rb"))
-crop_enc = pickle.load(open("crop.pkl", "rb"))
-ferti_enc = pickle.load(open("fertilizer.pkl", "rb"))
+# ===== Helper function to load pickle files =====
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))  # go up from pages/ to root
 
+def load_pickle(filename):
+    path = os.path.join(BASE_DIR, filename)
+    with open(path, "rb") as f:
+        return pickle.load(f)
+
+# ===== Load model and encoders =====
+model = load_pickle("rf_file.pkl")
+soil_enc = load_pickle("soil.pkl")
+crop_enc = load_pickle("crop.pkl")
+ferti_enc = load_pickle("fertilizer.pkl")
+
+# ===== Streamlit UI =====
 st.title("🌿 Fertilizer Predictor")
 st.write("Enter your field conditions to get personalized fertilizer recommendations")
 
-# Options
 soil_options = ["Clayey", "Loamy", "Red", "Black", "Sandy"]
 crop_options = [
     "rice", "Wheat", "Tobacco", "Sugarcane", "Pulses", "pomegranate", "Paddy",

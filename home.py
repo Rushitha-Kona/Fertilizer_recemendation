@@ -1,6 +1,17 @@
 import streamlit as st
 import base64
 
+import os
+import pickle
+
+# Base directory = root of your repo
+BASE_DIR = os.path.dirname(__file__)  # home.py is in root
+
+def load_pickle(filename):
+    path = os.path.join(BASE_DIR, filename)
+    with open(path, "rb") as f:
+        return pickle.load(f)
+
 # Function to encode image
 def get_base64(file):
     with open(file, "rb") as f:
