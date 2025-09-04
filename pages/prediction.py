@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))  # go up from pages/ to ro
 def load_pickle(filename):
     path = os.path.join(BASE_DIR, filename)
     with open(path, "rb") as f:
-        return pickle.load(f)
+        return pickle.load(f, encoding='latin1')
 
 # ===== Load model and encoders =====
 model = load_pickle("rf_file.pkl")
