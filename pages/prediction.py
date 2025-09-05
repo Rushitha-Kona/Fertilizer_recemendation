@@ -1,21 +1,37 @@
-import pickle
-import numpy as np
 import streamlit as st
+import numpy as np
 import os
+import joblib
 
-# ===== Helper function to load pickle files =====
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))  # go up from pages/ to root
+# ===== Back to Home button =====
+st.markdown(
+    """
+    <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
+        <a href="/" style="
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        ">🏠 Back to Home</a>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
-def load_pickle(filename):
+# ===== Helper function to load joblib files =====
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))  # go up from pages/ to repo root
+
+def load_model(filename):
     path = os.path.join(BASE_DIR, filename)
-    with open(path, "rb") as f:
-        return pickle.load(f, encoding='latin1')
+    return joblib.load(path)
 
-# ===== Load model and encoders =====
-model = load_pickle("rf_file.pkl")
-soil_enc = load_pickle("soil.pkl")
-crop_enc = load_pickle("crop.pkl")
-ferti_enc = load_pickle("fertilizer.pkl")
+# ===== Load models and encoders =====
+model = load_model("rf_file.pkl")
+soil_enc = load_model("soil.pkl")
+crop_enc = load_model("crop.pkl")
+ferti_enc = load_model("fertilizer.pkl")
 
 # ===== Streamlit UI =====
 st.title("🌿 Fertilizer Predictor")

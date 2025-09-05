@@ -1,17 +1,6 @@
 import streamlit as st
 import base64
 
-import os
-import pickle
-
-# Base directory = root of your repo
-BASE_DIR = os.path.dirname(__file__)  # home.py is in root
-
-def load_pickle(filename):
-    path = os.path.join(BASE_DIR, filename)
-    with open(path, "rb") as f:
-        return pickle.load(f)
-
 # Function to encode image
 def get_base64(file):
     with open(file, "rb") as f:
@@ -146,7 +135,7 @@ with step1:
             <div style="font-size: 30px; color: #4CAF50;">1</div>
             <h4 style="color:#1b4332;">Environment Data</h4>
             <p style="color:#4a4a4a; font-size:15px;">
-                🌡️ Enter temperature, humidity, and soil moisture levels
+                🌡 Enter temperature, humidity, and soil moisture levels
             </p>
         </div>
         """, unsafe_allow_html=True
